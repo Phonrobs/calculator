@@ -1,19 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Calculator @page="changePage($event)" v-show="currentPage == 'calculator'"></Calculator>
+    <Memory v-if="currentPage == 'memory'" @close="changePage('calculator')"></Memory>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Calculator from "./components/Calculator.vue";
+import Memory from "./components/Memory.vue";
 
 export default {
-  name: 'App',
+  name: "App",
+
   components: {
-    HelloWorld
-  }
-}
+    Calculator,
+    Memory,
+  },
+
+  data() {
+    return {
+      currentPage: "calculator",
+    };
+  },
+
+  methods: {
+    changePage(e) {
+      this.currentPage = e;
+    },
+  },
+};
 </script>
 
 <style>
